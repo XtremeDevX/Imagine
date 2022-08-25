@@ -23,12 +23,13 @@ import com.wajahatkarim3.imagine.R
 import com.wajahatkarim3.imagine.databinding.TagItemLayoutBinding
 import com.wajahatkarim3.imagine.model.TagModel
 
-class TagsAdapter(val onTagSelected: (tag: TagModel, position: Int) -> Unit) : RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
+class TagsAdapter(val onTagSelected: (tag: TagModel, position: Int) -> Unit) :
+    RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
 
-    private val tagItems: ArrayList<TagModel> = arrayListOf()
+    private val tagItems = arrayListOf<TagModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
-        var binding = TagItemLayoutBinding.inflate(
+        val binding = TagItemLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -48,7 +49,8 @@ class TagsAdapter(val onTagSelected: (tag: TagModel, position: Int) -> Unit) : R
         notifyDataSetChanged()
     }
 
-    inner class TagViewHolder(val itemBinding: TagItemLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    inner class TagViewHolder(val itemBinding: TagItemLayoutBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(tagModel: TagModel, position: Int) {
             itemBinding.apply {

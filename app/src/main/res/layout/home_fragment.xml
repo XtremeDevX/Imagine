@@ -68,14 +68,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerTags"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/cardSearchPhotos"
             app:layout_constraintTop_toBottomOf="@+id/lblExplore"
-            app:spanCount="4"
             tools:itemCount="7"
             tools:listitem="@layout/tag_item_layout" />
 
