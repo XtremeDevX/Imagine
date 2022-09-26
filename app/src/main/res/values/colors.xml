@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="color_primary">#138C64</color>
     <color name="color_primary_dark">#086747</color>
     <color name="color_on_primary">#EFEFEF</color>
@@ -15,4 +16,6 @@
 
     <color name="color_box_background">#FFFFFF</color>
     <color name="color_hint_text">#C1C1C1</color>
+
+    <color name="transparent">#00000000</color>
 </resources>

@@ -25,7 +25,7 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var _bi: VB? = null
-    protected val bi: VB get() = _bi!!
+    protected val binding: VB get() = _bi!!
 
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 

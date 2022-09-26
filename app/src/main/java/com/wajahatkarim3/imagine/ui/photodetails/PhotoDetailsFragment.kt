@@ -54,7 +54,7 @@ class PhotoDetailsFragment : BaseFragment<PhotoDetailsFragmentBinding>() {
 
     fun initObservations() {
         viewModel.photoModelLiveData.observe(viewLifecycleOwner) { photo ->
-            bi.photoView.load(photo.urls.full)
+            binding.photoView.load(photo.urls.full)
         }
     }
 }

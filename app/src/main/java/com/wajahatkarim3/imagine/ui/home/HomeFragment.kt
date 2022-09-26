@@ -23,6 +23,7 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -64,6 +65,24 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
     fun setupViews() {
         context?.let { context ->
             // Tags RecyclerView
+            viewModel.isGridLayout.observe(viewLifecycleOwner) { isGridLayout ->
+                when (isGridLayout) {
+                    true -> {
+                        binding.btnChangeViewLayout.setImageResource(R.drawable.ic_list_view)
+                        binding.recyclerPopularPhotos.layoutManager =
+                            GridLayoutManager(context, 2)
+                        binding.recyclerPopularPhotos.recycledViewPool.clear()
+
+                    }
+                    false -> {
+                        binding.btnChangeViewLayout.setImageResource(R.drawable.ic_grid_view)
+                        binding.recyclerPopularPhotos.layoutManager = LinearLayoutManager(context)
+                        binding.recyclerPopularPhotos.recycledViewPool.clear()
+
+                    }
+                }
+            }
+
             tagsAdapter = TagsAdapter { tag, _ ->
                 performSearch(tag.tagName)
             }
@@ -84,6 +103,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
                 RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             binding.recyclerPopularPhotos.adapter = photosAdapter
 
+            binding.recyclerPopularPhotos.setHasFixedSize(true)
             // NestedScrollView
             binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView, _, scrollY, _, _ ->
                 if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
@@ -105,6 +125,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
                     true
                 }
                 false
+            }
+
+            binding.btnChangeViewLayout.setOnClickListener {
+                viewModel.changePopularPhotoLayout()
             }
         }
     }
@@ -158,6 +182,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
             photosAdapter.updateItems(photos)
         }
     }
+
 
     fun initTags() {
         val tags = arrayListOf(

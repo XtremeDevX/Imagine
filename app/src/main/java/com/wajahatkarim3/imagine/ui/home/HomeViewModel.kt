@@ -34,11 +34,14 @@ class HomeViewModel @Inject constructor(
     private val searchPhotosUsecase: SearchPhotosUsecase
 ) : ViewModel() {
 
-    private var _uiState = MutableLiveData<HomeUiState>()
-    var uiStateLiveData: LiveData<HomeUiState> = _uiState
+    private val _uiState = MutableLiveData<HomeUiState>()
+    val uiStateLiveData: LiveData<HomeUiState> = _uiState
 
-    private var _photosList = MutableLiveData<List<PhotoModel>>()
-    var photosListLiveData: LiveData<List<PhotoModel>> = _photosList
+    private val _photosList = MutableLiveData<List<PhotoModel>>()
+    val photosListLiveData: LiveData<List<PhotoModel>> = _photosList
+
+    private val _isGridLayout = MutableLiveData(true)
+    val isGridLayout: LiveData<Boolean> = _isGridLayout
 
     private var pageNumber = 1
     private var searchQuery: String = ""
@@ -46,6 +49,8 @@ class HomeViewModel @Inject constructor(
     init {
         fetchPhotos(pageNumber)
     }
+
+    fun changePopularPhotoLayout() { _isGridLayout.value = _isGridLayout.value != true}
 
     fun loadMorePhotos() {
         pageNumber++
